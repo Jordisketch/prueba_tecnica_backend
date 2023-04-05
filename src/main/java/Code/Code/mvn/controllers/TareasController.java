@@ -40,22 +40,20 @@ public class TareasController {
 
 
     @RequestMapping(value = "/agregar")
-    public ResponseEntity<Tarea> guardarTarea(@RequestBody Tarea tarea) {
-
+    public ResponseEntity<?> guardarTarea(@RequestBody Tarea tarea) {
         if (!tarea.hasData())
             return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
 
         tarea = tareaService.save(tarea);
-        return new ResponseEntity<>(tarea, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/eliminar/{id}")
-    public ResponseEntity<String> eliminarTarea(@PathVariable Integer id) {
+    @RequestMapping(value = "/eliminar/{id}", produces="text/plain")
+    public ResponseEntity<?> eliminarTarea(@PathVariable Integer id) {
         if(tareaService.delete(id)){
             return new ResponseEntity<>(null, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(null, HttpStatus.OK);
         }
+        return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
     }
 
 

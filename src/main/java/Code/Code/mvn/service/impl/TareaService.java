@@ -36,6 +36,7 @@ public class TareaService implements ITareaService {
         Tarea tarea = tareaDao.findTareaById(id);
 
         if(tarea != null && !tarea.getId().equals(0)){
+            tarea.setColaborador(null);
             tareaDao.delete(tarea);
             return true;
         }

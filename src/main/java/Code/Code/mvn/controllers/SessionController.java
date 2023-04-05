@@ -19,11 +19,11 @@ public class SessionController {
     public ResponseEntity<?> createUser(@RequestBody Session session) {
 
         if(session.getUsername().equalsIgnoreCase("") || session.getPassword().equalsIgnoreCase("") || session.getEmail().equalsIgnoreCase("")){
-            return new ResponseEntity<>("Error al crear el usuario, verifique los datos.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Error al crear el usuario, verifique los datos.", HttpStatus.NOT_ACCEPTABLE);
         }
 
         if(sessionService.existUser(session.getEmail())){
-            return new ResponseEntity<>("Ya existe un registro con los mismos datos.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Ya existe un registro con los mismos datos.", HttpStatus.NOT_ACCEPTABLE);
         };
 
         session.setPassword(new BCryptPasswordEncoder().encode(session.getPassword()));
