@@ -23,7 +23,7 @@ public class TareaService implements ITareaService {
 
     @Override
     public List<Tarea> getAll() {
-        return tareaDao.findAll();
+        return tareaDao.getAllTareasAsc();
     }
 
     @Override
